@@ -16,7 +16,3 @@ OUTPUT=$4
 REDUCER=$5
 
 $HADOOP_EXE jar $HADOOP_STREAM_JAR  -files $FILES -D mapred.reduce.tasks=1 -input $INPUT1 -input $INPUT2 -output $OUTPUT -mapper cat -reducer "$REDUCER"
-
-
-
-
