@@ -54,6 +54,3 @@ score = mean_absolute_error(df['true'], df['pred'])
 print(score)
 
 sys.exit(0)
-
-
-

@@ -15,6 +15,3 @@ MAPPER=$4
 
 $HADOOP_EXE jar $HADOOP_STREAM_JAR  -files $FILES -D mapred.reduce.tasks=0 -input $INPUT -output $OUTPUT -mapper $MAPPER
 
-
-
-
