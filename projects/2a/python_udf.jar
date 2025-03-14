@@ -1,0 +1,29 @@
+package com.example.hiveudf;
+
+import org.apache.hadoop.hive.ql.exec.UDF;
+import org.apache.hadoop.io.Text;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class PythonUDF extends UDF {
+    public Text evaluate(Text input) {
+        try {
+            // Команда для вызова Python-скрипта
+            String[] cmd = {"/usr/bin/python3", "/projects/2a/predict_udf.py"};
+            Process process = Runtime.getRuntime().exec(cmd);
+
+            // Передаем входные данные в Python-скрипт
+            process.getOutputStream().write(input.toString().getBytes());
+            process.getOutputStream().close();
+
+            // Читаем результат из Python-скрипта
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String result = reader.readLine();
+            process.waitFor();
+
+            return new Text(result);
+        } catch (Exception e) {
+            return new Text("ERROR: " + e.getMessage());
+        }
+    }
+}
