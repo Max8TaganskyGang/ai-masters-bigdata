@@ -2,10 +2,14 @@ from pyspark.ml.regression import LinearRegression
 from pyspark.ml.feature import *
 from pyspark.ml import Pipeline
 
-tok = Tokenizer(inputCol="reviewText", outputCol="words")
+tokenizer = Tokenizer(inputCol="reviewText", outputCol="words")
+hasher = HashingTF(numFeatures=50, binary=True, inputCol=tokenizer.getOutputCol(), outputCol="word_vector")
+
+lr = LinearRegression(featuresCol=hasher.getOutputCol(), labelCol="overall", maxIter=15)
+
 pipeline = Pipeline(stages=[
-    tok,
-    HashingTF(numFeatures=50, binary=True, inputCol=tokenizer.getOutputCol(), outputCol="word_vector"),
-    LinearRegression(featuresCol=hasher.getOutputCol(), labelCol="overall", maxIter=15)
+    tokenizer,
+    hasher,
+    lr
 ])
 
