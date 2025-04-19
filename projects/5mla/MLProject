@@ -1,0 +1,10 @@
+name: 5mla_project
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      train_path: {type: str}
+      model_param1: {type: float, default: 0.1}
+    command: "python train.py {train_path} {model_param1}"

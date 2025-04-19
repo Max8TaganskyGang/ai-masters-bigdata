@@ -1,0 +1,14 @@
+name: dsenv1
+channels:
+  - defaults
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
+dependencies:
+  - mkl=2023.1.0=h213fc3f_46344
+  - scikit-learn=1.6.1=py312h6a678d5_0
+
+  - pip:
+      - mlflow-skinny==2.21.3
+      - pandas==2.1.4
+      
+prefix: /opt/conda/envs/dsenv
