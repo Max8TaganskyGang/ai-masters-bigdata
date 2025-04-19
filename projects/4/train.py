@@ -1,7 +1,7 @@
 import argparse
 from pyspark.sql import SparkSession
 import sys
-from model import pipeline
+
 
 spark = SparkSession.builder.getOrCreate()
 spark.sparkContext.setLogLevel('WARN')
