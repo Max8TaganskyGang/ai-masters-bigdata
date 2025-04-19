@@ -10,8 +10,8 @@ train_path = sys.argv[1]
 model_path = sys.argv[2]
 
 
+from model import pip
 train_df = spark.read.json(train_path).fillna( {"reviewText": "missingreview"})
-
-pipeline_model = pipeline.fit(train_df)
+pipeline_model = pip.fit(train_df)
 
 pipeline_model.write().overwrite().save(model_path)
